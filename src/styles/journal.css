@@ -29,3 +29,11 @@ label {
     margin: auto 0;
     text-align: center;
 }
+
+button {
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 5px;
+    width: 200px;
+}
