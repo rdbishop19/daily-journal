@@ -41,6 +41,17 @@ const makeJournalEntryComponent = (journalEntry) => {
     `
 }
 
-journalEntries.forEach((entry) => {
-    console.log(entry)
-})
+/*
+    Purpose: To render all journal entries to the DOM
+    Arguments: entries (array of objects)
+*/
+let entryList = "";
+const renderJournalEntries = (entries) => {
+    entries.forEach((entry) => {
+        entryList += makeJournalEntryComponent(entry);
+    })
+    document.querySelector(".entryLog").innerHTML = entryList;
+}
+
+// Invoke the render function
+renderJournalEntries(journalEntries)
