@@ -45,11 +45,7 @@ const makeJournalEntryComponent = (journalEntry) => {
     Purpose: To render all journal entries to the DOM
     Arguments: entries (array of objects)
 */
-<<<<<<< HEAD
 let entryList = "";
-=======
-let entryList;
->>>>>>> f88debd742a6748702361ed51282ad4c8f4e54eb
 const renderJournalEntries = (entries) => {
     entries.forEach((entry) => {
         entryList += makeJournalEntryComponent(entry);
