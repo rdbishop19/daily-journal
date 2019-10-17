@@ -1,30 +1,15 @@
+/*
+    Main application logic that uses the functions and objects
+    defined in the other JavaScript files.
 
-const makeJournalEntryComponent = (journalEntry) => {
-    // Create your own HTML structure for a journal entry
-    return `
-        <section class="entry">
-        <h2>${journalEntry.concept}</h2>
-            <h3>${journalEntry.date}</h3>
-            <p>${journalEntry.entry}</p>
-            <p>Mood: ${journalEntry.mood}</p>
-        </section>
-        `
-}
+    Change the fake variable names below to what they should be
+    to get the data and display it.
+*/
+// objectWithGetterMethod.methodToGetData().then(functionThatRendersData)
 
-let entryList = "";
-const renderJournalEntries = (entries) => {
-    entries.forEach((entry) => {
-        entryList += makeJournalEntryComponent(entry);
-    })
-    document.querySelector(".entryLog").innerHTML = entryList;
-}
+// console.log(API);
+API.getJournalEntries().then(entries => { renderJournalEntries(entries) })
 
 // Invoke the render function
 // renderJournalEntries(journalEntries)
 
-fetch("http://localhost:3000/entries") // Fetch from the API
-.then(entries => entries.json())  // Parse as JSON
-.then(parsedEntries => {
-    renderJournalEntries(parsedEntries)
-        // What should happen when we finally have the array?
-    })
