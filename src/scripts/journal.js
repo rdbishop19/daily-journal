@@ -2,6 +2,9 @@
     Main application logic that uses the functions and objects
     defined in the other JavaScript files.
 */
-API.getJournalEntries().then(entries => { 
-    DOM.renderJournal(entries);
+import data from "./data.js"
+import dom from "./dom.js"
+
+data.getJournalEntries().then(entries => { 
+    dom.renderJournal(entries);
 })
