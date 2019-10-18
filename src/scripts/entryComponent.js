@@ -1,11 +1,12 @@
-const makeJournalEntryComponent = (journalEntry) => {
-    // Create your own HTML structure for a journal entry
-    return `
-        <section class="entry">
-        <h2>${journalEntry.concept}</h2>
-            <h3>${journalEntry.date}</h3>
-            <p>${journalEntry.entry}</p>
-            <p>Mood: ${journalEntry.mood}</p>
-        </section>
-        `
+const Journal = {
+    createNew(entry) {
+        return `
+            <section class="entry">
+            <h2>${entry.concept}</h2>
+                <h3>${entry.date}</h3>
+                <p>${entry.entry}</p>
+                <p>Mood: ${entry.mood}</p>
+            </section>
+            `   
+    }
 }
