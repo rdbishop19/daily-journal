@@ -8,7 +8,17 @@ const entry = {
                 <p>Mood: ${journalEntry.mood}</p>
             </section>
             `   
+    },
+    createEntryObject(date, concepts, description, mood) {
+        return {
+            date: date.value,
+            concept: concepts.value,
+            description: description.value,
+            mood: mood.value
+        }
     }
+    // TODO: delete entry from database
+    // TODO: update entry in database
 }
 
 export default entry;
