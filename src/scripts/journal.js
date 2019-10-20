@@ -4,7 +4,7 @@
 */
 import data from "./data.js"
 import dom from "./dom.js"
+import entry from "./entry.js";
 
-data.getJournalEntries().then(entries => { 
-    dom.renderJournal(entries);
-})
+data.getJournalEntries().then(entries => dom.renderJournal(entries));
+dom.createSubmitHandler();
