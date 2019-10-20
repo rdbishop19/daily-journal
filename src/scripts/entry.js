@@ -1,5 +1,5 @@
 const entry = {
-    createNew(journalEntry) {
+    renderHtml(journalEntry) {
         return `
             <section class="entry">
             <h2>${journalEntry.concept}</h2>

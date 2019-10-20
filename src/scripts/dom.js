@@ -4,9 +4,8 @@ import data from "./data.js";
 const dom = {
     renderJournal(entries) {
         let entryList = "";
-        console.log("dom entries", entries);
         entries.forEach(item => {
-            entryList += entry.createNew(item);
+            entryList += entry.renderHtml(item);
         })
         document.querySelector(".entryLog").innerHTML = entryList;
     },
