@@ -13,13 +13,6 @@
       "concept": "CSS Selectors",
       "description": "We learned about styling a webpage using css and keeping the html source code linked to the css styles with ids and classes.",
       "mood": "Excited"
-    },
-    {
-      "id": 3,
-      "date": "10/02/2019",
-      "concept": "DOM Manipulation",
-      "description": "We learned about making changes to a webpage using Javascript DOM methods.",
-      "mood": "Tired"
     }
   ]
 }
