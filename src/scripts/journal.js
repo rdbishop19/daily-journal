@@ -4,5 +4,5 @@
 */
 import Dom from "./dom.js"
 
+// TODO: Dom.renderEntryForm();
 Dom.renderJournal();
-Dom.createSubmitHandler();

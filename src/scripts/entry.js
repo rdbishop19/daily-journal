@@ -1,3 +1,5 @@
+import Data from "./data.js"
+
 const Entry = {
     renderHtml({ id, concept, date, description, mood }) {
         return `
@@ -6,15 +8,21 @@ const Entry = {
                 <h3>${date}</h3>
                 <p>${description}</p>
                 <p><strong>Mood:</strong> ${mood}</p>
-                <button id="delete--${id}">Delete</button>
+                <button id="edit--${id}" class="edit">Edit</button>
+                <button id="delete--${id}" class="delete">Delete</button>
             </section>
             `   
     },
     createEntryObject(date, concept, description, mood) {
         return ({ date, concept, description, mood })
-    }
-    // TODO: delete entry from database
+    },
     // TODO: update entry in database
+    editEntryObject(entryId, entry){
+        // TODO: create modal
+        
+        // send 'PATCH' request to server
+        Data.updateJournalEntry(entryId, updatedEntry)
+    }
 }
 
 export default Entry;

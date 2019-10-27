@@ -1,7 +1,11 @@
 import Entry from "./entry.js";
 import Data from "./data.js";
+import Events from "./events.js"
 
 const Dom = {
+    renderEntryForm() {
+        // TODO: move hard-coded form in index.html to this component
+    },
     renderJournal() {
         Data.getJournalEntries()
         .then(entries => {
@@ -10,24 +14,8 @@ const Dom = {
                 entryList += Entry.renderHtml(entry);
             })
             document.querySelector(".entryLog").innerHTML = entryList;
+            Events.attachButtonEvents();
         })
-    },
-    createSubmitHandler() {
-        const getFormFields = () => {
-            let date = document.querySelector("#journalDate").value
-            let concept = document.querySelector("#conceptsCovered").value
-            let description = document.querySelector("#journalEntry").value
-            let mood = document.querySelector("#mood").value
-        
-            const newJournalEntry = Entry.createEntryObject(
-                date, concept, description, mood)
-            // post.then(get).then(render)
-            Data.saveJournalEntry(newJournalEntry)
-                .then(data.getJournalEntries) // don't invoke function = ex. getJournalEntries()
-                .then(entries => Dom.renderJournal(entries))
-        }
-        
-        document.querySelector("button").addEventListener("click", getFormFields);
     }
 }
 
