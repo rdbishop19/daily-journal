@@ -1,31 +1,34 @@
-import entry from "./entry.js";
-import data from "./data.js";
+import Entry from "./entry.js";
+import Data from "./data.js";
 
-const dom = {
-    renderJournal(entries) {
-        let entryList = "";
-        entries.forEach(item => {
-            entryList += entry.renderHtml(item);
+const Dom = {
+    renderJournal() {
+        Data.getJournalEntries()
+        .then(entries => {
+            let entryList = "";
+            entries.forEach(entry => {
+                entryList += Entry.renderHtml(entry);
+            })
+            document.querySelector(".entryLog").innerHTML = entryList;
         })
-        document.querySelector(".entryLog").innerHTML = entryList;
     },
     createSubmitHandler() {
         const getFormFields = () => {
-            let journalDate = document.querySelector("#journalDate")
-            let conceptsCovered = document.querySelector("#conceptsCovered")
-            let journalEntry = document.querySelector("#journalEntry")
-            let mood = document.querySelector("#mood")
+            let date = document.querySelector("#journalDate").value
+            let concept = document.querySelector("#conceptsCovered").value
+            let description = document.querySelector("#journalEntry").value
+            let mood = document.querySelector("#mood").value
         
-            const newJournalEntry = entry.createEntryObject(
-                journalDate, conceptsCovered, journalEntry, mood)
+            const newJournalEntry = Entry.createEntryObject(
+                date, concept, description, mood)
             // post.then(get).then(render)
-            data.saveJournalEntry(newJournalEntry)
+            Data.saveJournalEntry(newJournalEntry)
                 .then(data.getJournalEntries) // don't invoke function = ex. getJournalEntries()
-                .then(entries => dom.renderJournal(entries))
+                .then(entries => Dom.renderJournal(entries))
         }
         
         document.querySelector("button").addEventListener("click", getFormFields);
     }
 }
 
-export default dom
+export default Dom

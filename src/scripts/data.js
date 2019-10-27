@@ -1,6 +1,8 @@
-const data = {
+import Dom from "./dom.js"
+
+const Data = {
 	getJournalEntries() {
-		return fetch('http://localhost:3000/entries').then((response) => response.json());
+		return fetch('http://localhost:3000/entries').then(r => r.json())
 	},
 	saveJournalEntry(newJournalEntry) {
 		// Use `fetch` with the POST method to add your entry to your API
@@ -14,4 +16,4 @@ const data = {
 	}
 };
 
-export default data
+export default Data

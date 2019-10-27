@@ -20,6 +20,13 @@
       "concept": "DOM Manipulation",
       "description": "We learned about making changes to a webpage using Javascript DOM methods.",
       "mood": "Tired"
+    },
+    {
+      "date": "2019-10-27",
+      "concept": "test 1, 2",
+      "description": "test journal entry",
+      "mood": "Meh",
+      "id": 4
     }
   ]
 }
