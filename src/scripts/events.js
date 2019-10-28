@@ -28,32 +28,30 @@ const Events = {
         console.log("edit entry", entryId)
         // TODO: figure out modal for edit window on clicked entry
     },
-    characterCountEvent() {
-        const characterEventHandler = () => {
-            let characterCount = document.querySelector("#conceptsCovered").value.length
-            let maxCharNotice = document.querySelector("#characters-remaining")
-            let conceptsCovered = document.getElementById("conceptsCovered").value;
-            let maxCharLength = 80;
-            let displayAtNumber = maxCharLength - 15;
-            
-            console.log(characterCount);
-            if (characterCount <= displayAtNumber){
-                maxCharNotice.textContent = "";
-                maxCharNotice.style.color = "black";               
-            }
-            if (characterCount < maxCharLength){
-                maxCharNotice.classList.remove("warning");
-                maxCharNotice.textContent = `${maxCharLength - characterCount} remaining`
-            }
-            else if (characterCount = maxCharLength ){
-                // maxCharNotice.textContent = "*Too many characters"
-                maxCharNotice.textContent = "0 remaining";
-                maxCharNotice.classList.add("warning");
-                document.querySelector("#conceptsCovered").value = conceptsCovered.slice(0, maxCharLength);
-            }
+    characterCountHandler() {
+        let characterCount = document.querySelector("#conceptsCovered").value.length
+        let maxCharNotice = document.querySelector("#characters-remaining")
+        let conceptsCovered = document.getElementById("conceptsCovered").value;
+        let maxCharLength = 80;
+        let displayAtNumber = maxCharLength - 15;
+        
+        console.log(characterCount);
+        if (characterCount <= displayAtNumber){
+            maxCharNotice.textContent = "";
+            maxCharNotice.style.color = "black";               
+        }
+        if (characterCount < maxCharLength){
+            maxCharNotice.classList.remove("warning");
+            maxCharNotice.textContent = `${maxCharLength - characterCount} remaining`
+        }
+        else if (characterCount = maxCharLength ){
+            // maxCharNotice.textContent = "*Too many characters"
+            maxCharNotice.textContent = "0 remaining";
+            maxCharNotice.classList.add("warning");
+            document.querySelector("#conceptsCovered").value = conceptsCovered.slice(0, maxCharLength);
         }
     },
-    attachButtonEvents() {
+    attachEvents() {
         // 'save' button
         document.querySelector(".save").addEventListener("click", this.saveButtonHandler);
 
@@ -69,7 +67,7 @@ const Events = {
             button.addEventListener("click", this.editButtonHandler)
         })
         // character count event
-        document.querySelector("#conceptsCovered").addEventListener("keyup", characterEventHandler)
+        document.querySelector("#conceptsCovered").addEventListener("keyup", this.characterCountHandler)
     }
 }
 

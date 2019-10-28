@@ -30,7 +30,7 @@ const Dom = {
                 entryList += Entry.renderHtml(entry);
             })
             document.querySelector(".entryLog").innerHTML = entryList;
-            Events.attachButtonEvents();
+            Events.attachEvents();
         })
     }
 }
