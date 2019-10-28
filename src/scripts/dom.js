@@ -1,13 +1,10 @@
-import entry from "./entry.js";
-import data from "./data.js";
+import Entry from "./entry.js";
+import Data from "./data.js";
+import Events from "./events.js"
 
-const dom = {
-    renderJournal(entries) {
-        let entryList = "";
-        entries.forEach(item => {
-            entryList += entry.renderHtml(item);
-        })
-        document.querySelector(".entryLog").innerHTML = entryList;
+const Dom = {
+    renderEntryForm() {
+        // TODO: move hard-coded form in index.html to this component
     },
     createSubmitHandler() {
         const getFormFields = () => {
@@ -25,32 +22,17 @@ const dom = {
         }
         document.querySelector("button").addEventListener("click", getFormFields);
     },
-    addCharacterCountEvent() {
-        const characterEventHandler = () => {
-            let characterCount = document.querySelector("#conceptsCovered").value.length
-            let maxCharNotice = document.querySelector("#characters-remaining")
-            let conceptsCovered = document.getElementById("conceptsCovered").value;
-            let maxCharLength = 80;
-            let displayAtNumber = maxCharLength - 15;
-            
-            console.log(characterCount);
-            if (characterCount <= displayAtNumber){
-                maxCharNotice.textContent = "";
-                maxCharNotice.style.color = "black";               
-            }
-            if (characterCount < maxCharLength){
-                maxCharNotice.classList.remove("warning");
-                maxCharNotice.textContent = `${maxCharLength - characterCount} remaining`
-            }
-            else if (characterCount = maxCharLength ){
-                // maxCharNotice.textContent = "*Too many characters"
-                maxCharNotice.textContent = "0 remaining";
-                maxCharNotice.classList.add("warning");
-                document.querySelector("#conceptsCovered").value = conceptsCovered.slice(0, maxCharLength);
-            }
-        }
-        document.querySelector("#conceptsCovered").addEventListener("keyup", characterEventHandler)
+    renderJournal() {
+        Data.getJournalEntries()
+        .then(entries => {
+            let entryList = "";
+            entries.forEach(entry => {
+                entryList += Entry.renderHtml(entry);
+            })
+            document.querySelector(".entryLog").innerHTML = entryList;
+            Events.attachButtonEvents();
+        })
     }
 }
 
-export default dom
+export default Dom

@@ -1,24 +1,28 @@
-const entry = {
-    renderHtml(journalEntry) {
+import Data from "./data.js"
+
+const Entry = {
+    renderHtml({ id, concept, date, description, mood }) {
         return `
-            <section class="entry">
-            <h2>${journalEntry.concept}</h2>
-                <h3>${journalEntry.date}</h3>
-                <p>${journalEntry.description}</p>
-                <p>Mood: ${journalEntry.mood}</p>
+            <section id="entry--${id}" class="entry">
+            <h2>${concept}</h2>
+                <h3>${date}</h3>
+                <p>${description}</p>
+                <p><strong>Mood:</strong> ${mood}</p>
+                <button id="edit--${id}" class="edit">Edit</button>
+                <button id="delete--${id}" class="delete">Delete</button>
             </section>
             `   
     },
-    createEntryObject(date, concepts, description, mood) {
-        return {
-            date: date.value,
-            concept: concepts.value,
-            description: description.value,
-            mood: mood.value
-        }
-    }
-    // TODO: delete entry from database
+    createEntryObject(date, concept, description, mood) {
+        return ({ date, concept, description, mood })
+    },
     // TODO: update entry in database
+    editEntryObject(entryId, entry){
+        // TODO: create modal
+        
+        // send 'PATCH' request to server
+        Data.updateJournalEntry(entryId, updatedEntry)
+    }
 }
 
-export default entry;
+export default Entry;
