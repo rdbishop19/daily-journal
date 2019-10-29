@@ -9,13 +9,15 @@ body {
 fieldset {
     /* display: flex; */
     /* flex-direction: column; */
-    border: 2px solid goldenrod;
+    border: 2px solid;
+    background-color: rgb(216, 245, 247);
     border-radius: 4px; 
+    padding: 10px;
 }
 
 form {
     margin: 5px;
-    background-color: seashell;
+    /* background-color: seashell; */
 }
 
 label {
@@ -49,4 +51,13 @@ button {
     padding: 10px;
     margin: 5px;
     width: 200px;
+}
+
+.jumbotron {
+    background-image: url("../assets/Looseleaf_Legal_Pad_Background.svg");
+    /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/42/Looseleaf_Legal_Pad_Background.svg"); */
+}
+
+.entry {
+    margin: 50px 10%;
 }
