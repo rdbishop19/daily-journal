@@ -10,20 +10,20 @@ const Dom = {
 		// console.log(formContainer)
 
 		let entryForm = `<form action="">
-        <fieldset>
+        <fieldset class="form-group">
             <label for="journalDate">Date of Entry</label>
             <input type="date" name="journalDate" id="journalDate" class="form-field" required>
         </fieldset>
-        <fieldset>
+        <fieldset class="form-group">
             <label for="conceptsCovered">Concepts Covered</label><span id=characters-remaining></span>
             <input type="text" name="conceptsCovered" id="conceptsCovered" class="form-field">                
         </fieldset>
-        <fieldset>
+        <fieldset class="form-group">
             <label for="journalEntry">Journal Entry</label>
             <textarea name="journalEntry" id="journalEntry" cols="30" 
                 rows="10"class="form-field"></textarea>            
         </fieldset>
-        <fieldset>
+        <fieldset class="form-group">
             <label for="mood">Mood for the Day</label>
             <select name="mood" id="mood" class="form-field">
                 <option value=""></option>
@@ -35,7 +35,7 @@ const Dom = {
             </select>        
         </fieldset>
     </form>
-    <button class="save" type='submit'>Record Journal Entry</button>`;
+    <button id="save-entry" class="save btn btn-primary" type='submit'>Record Journal Entry</button>`;
 
 		// Add form to DOM container
 		formContainer.innerHTML = entryForm;

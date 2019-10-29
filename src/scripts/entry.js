@@ -8,8 +8,8 @@ const Entry = {
                 <h3>${date}</h3>
                 <p>${description}</p>
                 <p><strong>Mood:</strong> ${mood}</p>
-                <button id="edit--${id}" class="edit">Edit</button>
-                <button id="delete--${id}" class="delete">Delete</button>
+                <button id="edit--${id}" class="btn edit">Edit</button>
+                <button id="delete--${id}" class="btn btn-danger delete">Delete</button>
             </section>
             `   
     },
