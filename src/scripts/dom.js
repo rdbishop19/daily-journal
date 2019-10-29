@@ -1,56 +1,21 @@
-import Entry from "./entry.js";
-import Data from "./data.js";
-import Events from "./events.js"
+import Entry from './entry.js';
+import Data from './data.js';
+import Events from './events.js';
 
 const Dom = {
-    renderEntryForm() {
-        // TODO: move hard-coded form in index.html to this component
-        console.log('Render that there entry form');
-        let formContainer = document.querySelector("#formContainer")
-        // console.log(formContainer)
-        let entryFormEl = document.createElement("form")
+	renderEntryForm() {
+		// move hard-coded form in index.html to this component
+		// console.log('Render that there entry form');
+		let formContainer = document.querySelector('#formContainer');
+		// console.log(formContainer)
 
-        let dateEl = document.createElement("input")
-        dateEl.id = "journalDate"
-        let conceptEl = document.createElement("input")
-        conceptEl.id = "journalConcept"
-        let descriptionEl = document.createElement("input")
-        descriptionEl.id = "journalDescription"
-        let moodEl = document.createElement("input")
-        moodEl.id = "journalMood"
-        
-        let dateLabelEl = document.createElement("label")
-        dateLabelEl.htmlFor = "journalDate"
-        dateLabelEl.textContent = "Date of Entry"
-        let conceptLabelEl = document.createElement("label")
-        conceptLabelEl.htmlFor = "journalConcept"
-        conceptLabelEl.textContent = "Concepts Covered"
-        let descriptionLabelEl = document.createElement("label")
-        descriptionLabelEl.htmlFor = "journalDescription"
-        descriptionLabelEl.textContent = "Journal Entry"
-        let moodLabelEl = document.createElement("label")
-        moodLabelEl.htmlFor = "journalMood"
-        moodLabelEl.textContent = "Mood"
-
-        entryFormEl.appendChild(dateLabelEl)
-        entryFormEl.appendChild(dateEl)
-        entryFormEl.appendChild(conceptLabelEl)
-        entryFormEl.appendChild(conceptEl)
-        entryFormEl.appendChild(descriptionLabelEl)
-        entryFormEl.appendChild(descriptionEl)
-        entryFormEl.appendChild(moodLabelEl)
-        entryFormEl.appendChild(moodEl)
-        // entryFormEl.appendChild()
-        // formContainer.appendChild(entryFormEl)
-        console.log(entryFormEl)
-
-        let entryForm = `<form action="">
+		let entryForm = `<form action="">
         <fieldset>
             <label for="journalDate">Date of Entry</label>
             <input type="date" name="journalDate" id="journalDate" class="form-field" required>
         </fieldset>
         <fieldset>
-            <label for="conceptsCovered">Concepts Covered</label>
+            <label for="conceptsCovered">Concepts Covered</label><span id=characters-remaining></span>
             <input type="text" name="conceptsCovered" id="conceptsCovered" class="form-field">                
         </fieldset>
         <fieldset>
@@ -70,36 +35,34 @@ const Dom = {
             </select>        
         </fieldset>
     </form>
-    <button class="save" type='submit'>Record Journal Entry</button>`
-        formContainer.innerHTML = entryForm
-    },
-    createSubmitHandler() {
-        const getFormFields = () => {
-            let journalDate = document.querySelector("#journalDate")
-            let conceptsCovered = document.querySelector("#conceptsCovered")
-            let journalEntry = document.querySelector("#journalEntry")
-            let mood = document.querySelector("#mood")
-        
-            const newJournalEntry = entry.createEntryObject(
-                journalDate, conceptsCovered, journalEntry, mood)
-            // post.then(get).then(render)
-            data.saveJournalEntry(newJournalEntry)
-                .then(data.getJournalEntries) // don't invoke function = ex. getJournalEntries()
-                .then(entries => dom.renderJournal(entries))
-        }
-        document.querySelector("button").addEventListener("click", getFormFields);
-    },
-    renderJournal() {
-        Data.getJournalEntries()
-        .then(entries => {
-            let entryList = "";
-            entries.forEach(entry => {
-                entryList += Entry.renderHtml(entry);
-            })
-            document.querySelector(".entryLog").innerHTML = entryList;
-            Events.attachEvents();
-        })
-    }
-}
+    <button class="save" type='submit'>Record Journal Entry</button>`;
 
-export default Dom
+		// Add form to DOM container
+		formContainer.innerHTML = entryForm;
+	},
+	createSubmitHandler() {
+		let journalDate = document.querySelector('#journalDate');
+		let conceptsCovered = document.querySelector('#conceptsCovered');
+		let journalEntry = document.querySelector('#journalEntry');
+		let mood = document.querySelector('#mood');
+
+		const newJournalEntry = entry.createEntryObject(journalDate, conceptsCovered, journalEntry, mood);
+		// post.then(get).then(render)
+		Data
+			.saveJournalEntry(newJournalEntry)
+			.then(Data.getJournalEntries) // don't invoke function = ex. getJournalEntries()
+			.then((entries) => Dom.renderJournal(entries));
+	},
+	renderJournal() {
+		Data.getJournalEntries().then((entries) => {
+			let entryList = '';
+			entries.forEach((entry) => {
+				entryList += Entry.renderHtml(entry);
+			});
+			document.querySelector('.entryLog').innerHTML = entryList;
+			Events.attachEvents();
+		});
+	}
+};
+
+export default Dom;

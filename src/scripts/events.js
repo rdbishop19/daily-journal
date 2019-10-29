@@ -42,11 +42,11 @@ const Events = {
         }
         if (characterCount < maxCharLength){
             maxCharNotice.classList.remove("warning");
-            maxCharNotice.textContent = `${maxCharLength - characterCount} remaining`
+            maxCharNotice.textContent = `${maxCharLength - characterCount}`
         }
         else if (characterCount = maxCharLength ){
-            // maxCharNotice.textContent = "*Too many characters"
-            maxCharNotice.textContent = "0 remaining";
+            setTimeout(()=>{maxCharNotice.textContent = "0 remaining"}, 2000)
+            maxCharNotice.textContent = "Too many characters";
             maxCharNotice.classList.add("warning");
             document.querySelector("#conceptsCovered").value = conceptsCovered.slice(0, maxCharLength);
         }
