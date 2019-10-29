@@ -20,6 +20,13 @@
       "description": ".forEach(), .filter(), .map(), .find(), .reduce(), .sort()",
       "mood": "",
       "id": 3
+    },
+    {
+      "date": "2019-10-29",
+      "concept": "Bootstrap",
+      "description": "Added bootstrap styling to Daily Journal. Looks clean with little work to integrate. BANGARANG",
+      "mood": "Motivated",
+      "id": 4
     }
   ]
 }

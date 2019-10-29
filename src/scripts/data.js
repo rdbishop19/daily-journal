@@ -1,14 +1,14 @@
 // Fetch calls for normal CRUD operations
 
 const Data = {
-	baseUrl: "http://localhost:3000/entries",
+	Url: "http://localhost:3000/entries",
 
 	getJournalEntries() {
-		return fetch(this.baseUrl).then(r => r.json())
+		return fetch(this.Url).then(r => r.json())
 	},
 	saveJournalEntry(newJournalEntry) {
 		// Use `fetch` with the POST method to add your entry to your API
-		return fetch(this.baseUrl, {
+		return fetch(this.Url, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -17,12 +17,12 @@ const Data = {
 		})
 	},
 	deleteJournalEntry(entryId){
-		return fetch(`${this.baseUrl}/${entryId}`, {
+		return fetch(`${this.Url}/${entryId}`, {
 			method: "DELETE",
 		})
 	},
 	updateJournalEntry(entryId){
-		return fetch(`${this.baseUrl}/${entryId}`, {
+		return fetch(`${this.Url}/${entryId}`, {
 			method: "PATCH",
 		})
 	}

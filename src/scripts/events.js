@@ -12,7 +12,8 @@ const Events = {
         const newEntry = Entry.createEntryObject(date, concept, description, mood)
         // post.then(get).then(render)
         Data.saveJournalEntry(newEntry)
-            .then(Dom.renderJournal)        
+            .then(Dom.renderJournal)  
+        document.getElementById("journal-form").reset(); // not working      
     },
     deleteButtonHandler(){
         // console.log("Delete button clicked", event.target.id);
@@ -35,14 +36,14 @@ const Events = {
         let maxCharLength = 80;
         let displayAtNumber = maxCharLength - 15;
         
-        console.log(characterCount);
+        // console.log(characterCount);
         if (characterCount <= displayAtNumber){
             maxCharNotice.textContent = "";
             maxCharNotice.style.color = "black";               
         }
-        if (characterCount < maxCharLength){
+        else if (characterCount < maxCharLength){
             maxCharNotice.classList.remove("warning");
-            maxCharNotice.textContent = `${maxCharLength - characterCount}`
+            maxCharNotice.textContent = `${maxCharLength - characterCount} remaining`
         }
         else if (characterCount = maxCharLength ){
             setTimeout(()=>{maxCharNotice.textContent = "0 remaining"}, 2000)
