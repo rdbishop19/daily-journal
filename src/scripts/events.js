@@ -10,10 +10,10 @@ const Events = {
         let mood = document.querySelector("#mood").value
     
         const newEntry = Entry.createEntryObject(date, concept, description, mood)
+
         // post.then(get).then(render)
         Data.saveJournalEntry(newEntry)
             .then(Dom.renderJournal)  
-        // document.getElementById("journal-form").reset();  
     },
     deleteButtonHandler(){
         // console.log("Delete button clicked", event.target.id);
@@ -28,6 +28,12 @@ const Events = {
         let entryId = event.target.id.split("--")[1]
         console.log("edit entry", entryId)
         // TODO: figure out modal for edit window on clicked entry
+    },
+    clearButtonHandler(){
+        if (window.confirm("Click OK to clear the form and start over.")){
+            document.getElementById("journal-form").reset();
+            // console.log("clear clicked")
+        }
     },
     characterCountHandler() {
         let characterCount = document.querySelector("#conceptsCovered").value.length
@@ -67,6 +73,10 @@ const Events = {
         editButtons.forEach(button => {
             button.addEventListener("click", this.editButtonHandler)
         })
+
+        // 'clear' form button
+        document.querySelector("form").addEventListener("reset", this.clearButtonHandler);
+
         // character count event
         document.querySelector("#conceptsCovered").addEventListener("keyup", this.characterCountHandler)
     }

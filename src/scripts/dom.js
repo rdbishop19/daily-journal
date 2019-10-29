@@ -36,6 +36,7 @@ const Dom = {
                 </select>        
             </fieldset>
             <input type="submit" id="save-entry" class="save btn btn-primary" value="Record Journal Entry">
+            <input type="reset" id="clear-button" class="btn btn-default" value="Start Over">
         </form>`
 
 		// Add form to DOM container
