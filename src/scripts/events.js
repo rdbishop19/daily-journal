@@ -27,9 +27,31 @@ const Events = {
         let entryId = event.target.id.split("--")[1]
         console.log("edit entry", entryId)
         // TODO: figure out modal for edit window on clicked entry
-    }
-    ,
-    attachButtonEvents() {
+    },
+    characterCountHandler() {
+        let characterCount = document.querySelector("#conceptsCovered").value.length
+        let maxCharNotice = document.querySelector("#characters-remaining")
+        let conceptsCovered = document.getElementById("conceptsCovered").value;
+        let maxCharLength = 80;
+        let displayAtNumber = maxCharLength - 15;
+        
+        console.log(characterCount);
+        if (characterCount <= displayAtNumber){
+            maxCharNotice.textContent = "";
+            maxCharNotice.style.color = "black";               
+        }
+        if (characterCount < maxCharLength){
+            maxCharNotice.classList.remove("warning");
+            maxCharNotice.textContent = `${maxCharLength - characterCount}`
+        }
+        else if (characterCount = maxCharLength ){
+            setTimeout(()=>{maxCharNotice.textContent = "0 remaining"}, 2000)
+            maxCharNotice.textContent = "Too many characters";
+            maxCharNotice.classList.add("warning");
+            document.querySelector("#conceptsCovered").value = conceptsCovered.slice(0, maxCharLength);
+        }
+    },
+    attachEvents() {
         // 'save' button
         document.querySelector(".save").addEventListener("click", this.saveButtonHandler);
 
@@ -44,6 +66,8 @@ const Events = {
         editButtons.forEach(button => {
             button.addEventListener("click", this.editButtonHandler)
         })
+        // character count event
+        document.querySelector("#conceptsCovered").addEventListener("keyup", this.characterCountHandler)
     }
 }
 
