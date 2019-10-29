@@ -13,7 +13,7 @@ const Events = {
         // post.then(get).then(render)
         Data.saveJournalEntry(newEntry)
             .then(Dom.renderJournal)  
-        document.getElementById("journal-form").reset(); // not working      
+        // document.getElementById("journal-form").reset();  
     },
     deleteButtonHandler(){
         // console.log("Delete button clicked", event.target.id);
@@ -54,7 +54,7 @@ const Events = {
     },
     attachEvents() {
         // 'save' button
-        document.querySelector(".save").addEventListener("click", this.saveButtonHandler);
+        document.querySelector("form").addEventListener("submit", this.saveButtonHandler);
 
         // 'delete' buttons
         let deleteButtons = document.querySelectorAll(".delete")
