@@ -9,7 +9,7 @@ const Dom = {
 		let formContainer = document.querySelector('#formContainer');
 		// console.log(formContainer)
 
-		let entryForm = `<form action="">
+		let entryForm = `<form action="" id="journal-form">
         <fieldset class="form-group">
             <label for="journalDate">Date of Entry</label>
             <input type="date" name="journalDate" id="journalDate" class="form-field" required>
@@ -39,19 +39,6 @@ const Dom = {
 
 		// Add form to DOM container
 		formContainer.innerHTML = entryForm;
-	},
-	createSubmitHandler() {
-		let journalDate = document.querySelector('#journalDate');
-		let conceptsCovered = document.querySelector('#conceptsCovered');
-		let journalEntry = document.querySelector('#journalEntry');
-		let mood = document.querySelector('#mood');
-
-		const newJournalEntry = entry.createEntryObject(journalDate, conceptsCovered, journalEntry, mood);
-		// post.then(get).then(render)
-		Data
-			.saveJournalEntry(newJournalEntry)
-			.then(Data.getJournalEntries) // don't invoke function = ex. getJournalEntries()
-			.then((entries) => Dom.renderJournal(entries));
 	},
 	renderJournal() {
 		Data.getJournalEntries().then((entries) => {
