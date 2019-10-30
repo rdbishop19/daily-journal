@@ -12,7 +12,7 @@ const Dom = {
         let entryForm = `
         <form action="" id="journal-form">
             <fieldset class="form-group">
-                <label for="journalDate">Date of Entry</label>
+                <label for="journalDate">Date of Entry</label><span><button value="Today" id="today-button">Today</button></span>
                 <input type="date" name="journalDate" id="journalDate" class="form-field" required>
             </fieldset>
             <fieldset class="form-group">
