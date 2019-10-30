@@ -3,6 +3,9 @@
     defined in the other JavaScript files.
 */
 import Dom from "./dom.js"
+import Data from "./data.js"
+import Events from "./events.js"
 
 Dom.renderEntryForm();
-Dom.renderJournal();
+Data.getJournalEntries().then(Dom.renderJournal)
+Events.attachFormEvents()

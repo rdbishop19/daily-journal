@@ -1,7 +1,7 @@
 import Data from "./data.js"
 
 const Entry = {
-    renderHtml({ id, concept, date, description, mood }) {
+    createHtml({ id, concept, date, description, mood }) {
         return `
             <section id="entry--${id}" class="entry">
             <h2>${concept}</h2>
@@ -12,9 +12,6 @@ const Entry = {
                 <button id="delete--${id}" class="btn btn-danger delete">Delete</button>
             </section>
             `   
-    },
-    createEntryObject(date, concept, description, mood) {
-        return ({ date, concept, description, mood })
     },
     // TODO: update entry in database
     editEntryObject(entryId, entry){
