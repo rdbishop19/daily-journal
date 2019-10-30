@@ -4,16 +4,30 @@ import Entry from "./entry.js"
 
 const Events = {
     saveButtonHandler() {
+        event.preventDefault(); // prevents refreshing the page with 'submit'
         let date = document.querySelector("#journalDate").value
         let concept = document.querySelector("#conceptsCovered").value
         let description = document.querySelector("#journalEntry").value
         let mood = document.querySelector("#mood").value
     
-        const newEntry = Entry.createEntryObject(date, concept, description, mood)
-
-        // post.then(get).then(render)
-        Data.saveJournalEntry(newEntry)
-            .then(Dom.renderJournal)  
+        const regEx = /[^a-z0-9{}:;\s]/ig
+        function badChar(element){
+            // badCharFound = array if anything not in 'regEx' is found in the string
+            let badCharFound = element.match(regEx)
+            return badCharFound ? true : false
+        }
+        // if badChar 
+        if ([concept, description, mood].some(badChar)){
+            window.alert("Please use only numbers, letters, or { } : ; in form fields.")
+        }
+        else {
+            const newEntry = Entry.createEntryObject(date, concept, description, mood)
+            console.log("newEntry", newEntry)
+            // post.then(get).then(render)
+            Data.saveJournalEntry(newEntry)
+                .then(Dom.renderJournal)  
+                .then(document.getElementById("journal-form").reset())
+        }
     },
     deleteButtonHandler(){
         // console.log("Delete button clicked", event.target.id);
@@ -75,7 +89,7 @@ const Events = {
         })
 
         // 'clear' form button
-        document.querySelector("form").addEventListener("reset", this.clearButtonHandler);
+        document.querySelector("#clear-button").addEventListener("click", this.clearButtonHandler);
 
         // character count event
         document.querySelector("#conceptsCovered").addEventListener("keyup", this.characterCountHandler)
