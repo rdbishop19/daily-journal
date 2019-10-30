@@ -4,16 +4,30 @@ import Entry from "./entry.js"
 
 const Events = {
     saveButtonHandler() {
+        event.preventDefault(); // prevents refreshing the page with 'submit'
         let date = document.querySelector("#journalDate").value
         let concept = document.querySelector("#conceptsCovered").value
         let description = document.querySelector("#journalEntry").value
         let mood = document.querySelector("#mood").value
     
-        const newEntry = Entry.createEntryObject(date, concept, description, mood)
-        // post.then(get).then(render)
-        Data.saveJournalEntry(newEntry)
-            .then(Dom.renderJournal)  
-        document.getElementById("journal-form").reset(); // not working      
+        const regEx = /[^a-z0-9{}:;\s]/ig
+        function badChar(element){
+            // badCharFound = array if anything not in 'regEx' is found in the string
+            let badCharFound = element.match(regEx)
+            return badCharFound ? true : false
+        }
+        // if badChar 
+        if ([concept, description, mood].some(badChar)){
+            window.alert("Please use only numbers, letters, or { } : ; in form fields.")
+        }
+        else {
+            const newEntry = Entry.createEntryObject(date, concept, description, mood)
+            console.log("newEntry", newEntry)
+            // post.then(get).then(render)
+            Data.saveJournalEntry(newEntry)
+                .then(Dom.renderJournal)  
+                .then(document.getElementById("journal-form").reset())
+        }
     },
     deleteButtonHandler(){
         // console.log("Delete button clicked", event.target.id);
@@ -28,6 +42,12 @@ const Events = {
         let entryId = event.target.id.split("--")[1]
         console.log("edit entry", entryId)
         // TODO: figure out modal for edit window on clicked entry
+    },
+    clearButtonHandler(){
+        if (window.confirm("Click OK to clear the form and start over.")){
+            document.getElementById("journal-form").reset();
+            // console.log("clear clicked")
+        }
     },
     characterCountHandler() {
         let characterCount = document.querySelector("#conceptsCovered").value.length
@@ -54,7 +74,7 @@ const Events = {
     },
     attachEvents() {
         // 'save' button
-        document.querySelector(".save").addEventListener("click", this.saveButtonHandler);
+        document.querySelector("form").addEventListener("submit", this.saveButtonHandler);
 
         // 'delete' buttons
         let deleteButtons = document.querySelectorAll(".delete")
@@ -67,6 +87,10 @@ const Events = {
         editButtons.forEach(button => {
             button.addEventListener("click", this.editButtonHandler)
         })
+
+        // 'clear' form button
+        document.querySelector("#clear-button").addEventListener("click", this.clearButtonHandler);
+
         // character count event
         document.querySelector("#conceptsCovered").addEventListener("keyup", this.characterCountHandler)
     }
