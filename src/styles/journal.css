@@ -68,3 +68,11 @@ button {
     padding: 5px;
     background-color: lightblue;
 }
+
+legend {
+    border-bottom: none;
+}
+
+#mood-filter > input {
+    margin-left: 10px;
+}
