@@ -4,11 +4,11 @@ const Data = {
 	Url: "http://localhost:3000/entries",
 
 	getJournalEntries() {
-		return fetch(this.Url).then(r => r.json())
+		return fetch("http://localhost:3000/entries")
+			.then(r => r.json())
 	},
 	saveJournalEntry(newJournalEntry) {
-		// Use `fetch` with the POST method to add your entry to your API
-		return fetch(this.Url, {
+		return fetch("http://localhost:3000/entries", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
