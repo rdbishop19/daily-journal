@@ -49,6 +49,29 @@ const Events = {
             // console.log("clear clicked")
         }
     },
+    todayButtonHandler(){
+        event.preventDefault();
+        let dateField = document.querySelector("#journalDate")
+        let date = new Date()
+
+        // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
+        function formatDate(today) {
+            var d = new Date(today),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+        
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+        
+            return [year, month, day].join('-');
+        }
+        let today = formatDate(date)
+        console.log(today);
+        dateField.value = today;
+    },
     characterCountHandler() {
         let characterCount = document.querySelector("#conceptsCovered").value.length
         let maxCharNotice = document.querySelector("#characters-remaining")
@@ -93,6 +116,9 @@ const Events = {
 
         // character count event
         document.querySelector("#conceptsCovered").addEventListener("keyup", this.characterCountHandler)
+    
+        // 'today' form button
+        document.querySelector("#today-button").addEventListener("click", this.todayButtonHandler)
     }
 }
 
