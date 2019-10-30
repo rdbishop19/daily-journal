@@ -9,14 +9,18 @@ const Events = {
 		let description = document.querySelector('#journalEntry').value;
 		let mood = document.querySelector('#mood').value;
 
-		const regEx = /[^a-z0-9{}:;\s]/gi;
+        const mainRegEx = /[^a-z0-9{}.?!:;\s]/gi
+        const swearWords = /( (shit|damn|hell|fuck|bitch|) )/gi
+
 		function badChar(element) {
-			// badCharFound = array if anything not in 'regEx' is found in the string
-			let badCharFound = element.match(regEx);
-			return badCharFound ? true : false;
+			// badCharFound = array if anything not in 'mainRegEx' is found in the string
+            let badCharFound = element.match(mainRegEx);
+            let curseWordFound = element.match(swearWords)
+
+			return badCharFound || curseWordFound ? true : false;
 		}
-		if ([ concept, description, mood ].some(badChar)) {
-			window.alert('Please use only numbers, letters, or { } : ; in form fields.');
+		if ([ concept, description].some(badChar)) {
+			window.alert('Please use only numbers, letters, or { } : ; . ! ? in form fields. \nAlso, no profanity, please. :)');
 		} else {
 			Data.saveJournalEntry({ date, concept, description, mood })
 				.then(Data.getJournalEntries)
@@ -62,7 +66,6 @@ const Events = {
 			return [ year, month, day ].join('-');
 		}
 		let today = formatDate(date);
-		console.log(today);
 		dateField.value = today;
 	},
 	characterCountHandler() {
