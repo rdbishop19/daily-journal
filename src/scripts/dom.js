@@ -25,7 +25,7 @@ const Dom = {
             entryLog.innerHTML += newEntry;
         }
         Events.attachJournalEvents()
-	}
+    }
 };
 
 export default Dom;

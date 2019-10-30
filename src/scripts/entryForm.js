@@ -2,6 +2,7 @@ const Form = {
 	createEntryForm() {
 		return `
         <form action="" id="journal-form">
+            <input type="hidden" id="entryId" value="" />
             <fieldset class="form-group">
                 <label for="journalDate">Date of Entry</label><span><button value="Today" id="today-button">Today</button></span>
                 <input type="date" name="journalDate" id="journalDate" class="form-field" required>
@@ -26,7 +27,7 @@ const Form = {
                     <option value="Zombie">Zombie</option>
                 </select>        
             </fieldset>
-            <input type="submit" id="save-entry" class="save btn btn-primary" value="Record Journal Entry">
+            <input type="submit" id="save-entry" class="save btn btn-primary" value="Save Journal Entry">
             <input type="reset" id="clear-button" class="btn btn-default" value="Start Over">
         </form>`;
     },
