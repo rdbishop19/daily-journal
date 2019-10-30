@@ -1,32 +1,46 @@
 import Dom from './dom.js';
 import Data from './data.js';
+import Entry from './entry.js';
 
 const Events = {
 	saveButtonHandler() {
-		event.preventDefault(); // prevents refreshing the page with 'submit'
-		let date = document.querySelector('#journalDate').value;
-		let concept = document.querySelector('#conceptsCovered').value;
-		let description = document.querySelector('#journalEntry').value;
-		let mood = document.querySelector('#mood').value;
+        event.preventDefault(); // prevents refreshing the page with 'submit'
+        const hiddenEntryId = document.querySelector('#entryId').value
+		const date = document.querySelector('#journalDate').value;
+		const concept = document.querySelector('#conceptsCovered').value;
+		const description = document.querySelector('#journalEntry').value;
+		const mood = document.querySelector('#mood').value;
 
         const mainRegEx = /[^a-z0-9{}.?!:;\s]/gi
         const swearWords = /( (shit|damn|hell|fuck|bitch|) )/gi
 
 		function badChar(element) {
 			// badCharFound = array if anything not in 'mainRegEx' is found in the string
-            let badCharFound = element.match(mainRegEx);
-            let curseWordFound = element.match(swearWords)
+            const badCharFound = element.match(mainRegEx);
+            const curseWordFound = element.match(swearWords)
 
 			return badCharFound || curseWordFound ? true : false;
 		}
 		if ([ concept, description].some(badChar)) {
-			window.alert('Please use only numbers, letters, or { } : ; . ! ? in form fields. \nAlso, no profanity, please. :)');
-		} else {
+            window.alert('Please use only numbers, letters, or { } : ; . ! ? in form fields. \nAlso, no profanity, please. :)');
+            return
+        }
+        if (hiddenEntryId !== ""){
+            Data.updateJournalEntry(hiddenEntryId, {date, concept, description, mood})
+                .then(Data.getJournalEntries)
+                .then(Dom.renderJournal)
+                .then(() => {
+                    document.getElementById('journal-form').reset()
+                    document.querySelector('#entryId').value = ""
+                    document.querySelector("#clear-button").disabled = false;
+                })
+        }
+        else {
 			Data.saveJournalEntry({ date, concept, description, mood })
 				.then(Data.getJournalEntries)
 				.then(Dom.renderJournal)
-				.then(document.getElementById('journal-form').reset());
-		}
+                .then(document.getElementById('journal-form').reset())
+        }
 	},
 	deleteButtonHandler() {
 		// console.log("Delete button clicked", event.target.id);
@@ -41,7 +55,8 @@ const Events = {
 	editButtonHandler() {
 		let entryId = event.target.id.split('--')[1];
 		console.log('edit entry', entryId);
-		// TODO: figure out modal for edit window on clicked entry
+        // TODO: figure out modal for edit window on clicked entry
+        Entry.editEntryObject(entryId);
 	},
 	clearButtonHandler() {
 		if (window.confirm('Click OK to clear the form and start over.')) {

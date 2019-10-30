@@ -1,18 +1,11 @@
 {
   "entries": [
     {
-      "id": 1,
-      "date": "2019-09-30",
-      "concept": "Basic HTML/CSS",
-      "description": "We learned about basic HTML/CSS setup for a typical application. This was mostly review from what I learned in JumpStart and pre-work.",
-      "mood": "Motivated"
-    },
-    {
-      "id": 2,
       "date": "2019-10-01",
       "concept": "CSS Selectors",
       "description": "We learned about styling a webpage using css and keeping the html source code linked to the css styles with ids and classes.",
-      "mood": "Excited"
+      "mood": "Caffeinated",
+      "id": 2
     },
     {
       "date": "2019-10-28",
@@ -39,7 +32,7 @@
       "date": "2019-10-30",
       "concept": "Filter",
       "description": "applying the filter method to the moods",
-      "mood": "Motivated",
+      "mood": "Caffeinated",
       "id": 6
     }
   ]

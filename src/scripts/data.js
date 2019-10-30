@@ -7,8 +7,13 @@ const Data = {
 		return fetch("http://localhost:3000/entries")
 			.then(r => r.json())
 	},
+	getJournalEntry(entryId) {
+		return fetch(`http://localhost:3000/entries/${entryId}`)
+			.then(r => r.json())
+	}
+	,
 	saveJournalEntry(newJournalEntry) {
-		return fetch("http://localhost:3000/entries", {
+		return fetch(this.Url, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -21,9 +26,13 @@ const Data = {
 			method: "DELETE",
 		})
 	},
-	updateJournalEntry(entryId){
-		return fetch(`${this.Url}/${entryId}`, {
-			method: "PATCH",
+	updateJournalEntry(entryId, entry){
+		return fetch(`http://localhost:3000/entries/${entryId}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(entry)
 		})
 	}
 };

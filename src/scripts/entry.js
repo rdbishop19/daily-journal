@@ -13,12 +13,18 @@ const Entry = {
             </section>
             `   
     },
+    updateFormFields(entry){
+        document.querySelector('#entryId').value = entry.id
+        document.querySelector('#journalDate').value = entry.date
+		document.querySelector('#conceptsCovered').value = entry.concept
+		document.querySelector('#journalEntry').value = entry.description
+        document.querySelector('#mood').value = entry.mood
+        document.querySelector("#clear-button").disabled = true;
+    },
     // TODO: update entry in database
-    editEntryObject(entryId, entry){
-        // TODO: create modal
-        
-        // send 'PATCH' request to server
-        Data.updateJournalEntry(entryId, updatedEntry)
+    editEntryObject(entryId){
+        Data.getJournalEntry(entryId)
+            .then(this.updateFormFields)
     }
 }
 
