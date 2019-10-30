@@ -34,6 +34,13 @@
       "description": "Reviewing the POST method of HTTP requests with Steve Brownlee\nThis is more of a review of concepts that are covered in the daily journal exercises",
       "mood": "Meh",
       "id": 5
+    },
+    {
+      "date": "2019-10-30",
+      "concept": "Filter",
+      "description": "applying the filter method to the moods",
+      "mood": "Motivated",
+      "id": 6
     }
   ]
 }

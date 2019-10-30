@@ -38,16 +38,16 @@ const Form = {
         return `
             <fieldset id="mood-filter">
                 <legend>Filter Journal Entries by Mood</legend>
-                <input id="mood-1" type="radio" name="mood" value="Caffeinated">
+                <input id="mood-1" type="radio" name="mood--filter" value="Caffeinated">
                 <label for="mood-1">Caffeinated</label>
-                <input id="mood-2" type="radio" name="mood" value="Hacker">
+                <input id="mood-2" type="radio" name="mood--filter" value="Hacker">
                 <label for="mood-2">Hacker</label>
-                <input id="mood-3" type="radio" name="mood" value="Meh">
+                <input id="mood-3" type="radio" name="mood--filter" value="Meh">
                 <label for="mood-3">Meh</label>
-                <input id="mood-4" type="radio" name="mood" value="Motivated">
+                <input id="mood-4" type="radio" name="mood--filter" value="Motivated">
                 <label for="mood-4">Motivated</label>
-                <input id="mood-5" type="radio" name="mood" value="Zombie">
-                <label for="mood-5">Motivated</label>
+                <input id="mood-5" type="radio" name="mood--filter" value="Zombie">
+                <label for="mood-5">Zombie</label>
             </fieldset>
         `
     }

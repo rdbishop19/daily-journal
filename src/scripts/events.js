@@ -90,7 +90,21 @@ const Events = {
 			document.querySelector('#conceptsCovered').value = conceptsCovered.slice(0, maxCharLength);
 		}
     },
+    radioButtonHandler(){
+        const mood = event.target.value;
+        // console.log(mood)
+        Data.getJournalEntries().then((entries)=>{
+            // console.log(entries)
+            let filteredEntries = entries.filter(entry => entry.mood === mood)
+            // console.log(filteredEntries)            
+            Dom.renderJournal(filteredEntries)
+        })
+    },
     attachFormEvents() {
+        // 'filter by mood' radio buttons
+        document.getElementsByName("mood--filter").forEach(button => {
+            button.addEventListener("click", this.radioButtonHandler)
+        })
         // 'save' button
         document.querySelector('form')
             .addEventListener('submit', this.saveButtonHandler);

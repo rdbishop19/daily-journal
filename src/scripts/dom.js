@@ -13,7 +13,13 @@ const Dom = {
 	renderJournal(entries) {
         let entryLog = document.querySelector('.entryLog');
         entryLog.innerHTML = ''
-        
+
+        // checks for empty array of entries before proceeding
+        if (!entries.length){
+            entryLog.innerHTML = "<h3>No entries</h3>"
+            return
+        }
+
         for (const entry of entries) {
 			const newEntry = Entry.createHtml(entry);
             entryLog.innerHTML += newEntry;
