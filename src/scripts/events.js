@@ -2,6 +2,22 @@ import Dom from './dom.js';
 import Data from './data.js';
 import Entry from './entry.js';
 
+const flashJournalEntry = (entry) => {
+	window.setTimeout(()=>{
+		entry.classList.toggle("updated")
+	}, 200)
+	window.setTimeout(()=>{
+		entry.classList.toggle("updated")
+	}, 500)
+	window.setTimeout(()=>{
+		entry.classList.toggle("updated")
+	}, 700)
+	window.setTimeout(()=>{
+		entry.classList.toggle("updated")
+	}, 1000)
+}
+
+
 const Events = {
 	saveButtonHandler() {
         event.preventDefault(); // prevents refreshing the page with 'submit'
@@ -31,16 +47,39 @@ const Events = {
                 .then(Data.getJournalEntries)
                 .then(Dom.renderJournal)
                 .then(() => {
-                    document.getElementById('journal-form').reset()
+					document.getElementById('journal-form').reset()
+					let entryId = document.querySelector('#entryId').value
                     document.querySelector('#entryId').value = ""
 					document.querySelector("#clear-button").disabled = false;
+					// console.log('entryId', entryId)
+					let updatedEntry = document.getElementById(`entry--${entryId}`)
+					// console.log('updatedEntry', updatedEntry)
+					updatedEntry.scrollIntoView(true)
+					flashJournalEntry(updatedEntry)
                 })
         }
         else {
 			Data.saveJournalEntry({ date, concept, description, mood })
 				.then(Data.getJournalEntries)
 				.then(Dom.renderJournal)
-                .then(document.getElementById('journal-form').reset())
+				.then(() => {
+					document.getElementById('journal-form').reset()
+					window.scrollTo(0,document.body.scrollHeight)
+
+					// target newest journal entry and apply temporary flash of color (advice from Guy C.)
+					let entries = document.getElementsByClassName("description")
+					// loop through all journal entries
+					for (let entry of entries){
+						// is this the newest entry? if so, do fun stuff
+						if (entry.textContent === description) {
+							// console.log(entry.parentElement.id);
+							let journalId = entry.parentElement.id
+							let newEntry = document.getElementById(journalId)
+							
+							flashJournalEntry(newEntry)
+						}
+					}
+				})
         }
 	},
 	deleteButtonHandler() {
@@ -57,11 +96,16 @@ const Events = {
 		let entryId = event.target.id.split('--')[1];
 		console.log('edit entry', entryId);
         // TODO: figure out modal for edit window on clicked entry
-        Entry.editEntryObject(entryId);
+		Entry.editEntryObject(entryId);
+		document.getElementById('journalDate').focus();
+		window.scrollTo(0,0)
+
 	},
 	clearButtonHandler() {
 		if (window.confirm('Click OK to clear the form and start over.')) {
 			document.getElementById('journal-form').reset();
+			document.getElementById('journalDate').focus();
+			window.scrollTo(0,0)
 		}
 	},
 	todayButtonHandler() {
