@@ -34,13 +34,17 @@ const Events = {
                     document.getElementById('journal-form').reset()
                     document.querySelector('#entryId').value = ""
 					document.querySelector("#clear-button").disabled = false;
+					// document.querySelector("#journalDate").focus();
                 })
         }
         else {
 			Data.saveJournalEntry({ date, concept, description, mood })
 				.then(Data.getJournalEntries)
 				.then(Dom.renderJournal)
-                .then(document.getElementById('journal-form').reset())
+				.then(() => {
+					document.getElementById('journal-form').reset()
+					// document.querySelector("#journalDate").focus();
+				})
         }
 	},
 	deleteButtonHandler() {
@@ -62,6 +66,8 @@ const Events = {
 	clearButtonHandler() {
 		if (window.confirm('Click OK to clear the form and start over.')) {
 			document.getElementById('journal-form').reset();
+			document.getElementById('journalDate').focus();
+			window.scrollTo(0,0)
 		}
 	},
 	todayButtonHandler() {
