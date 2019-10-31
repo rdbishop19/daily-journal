@@ -2,6 +2,22 @@ import Dom from './dom.js';
 import Data from './data.js';
 import Entry from './entry.js';
 
+const flashJournalEntry = (entry) => {
+	window.setTimeout(()=>{
+		entry.classList.toggle("updated")
+	}, 200)
+	window.setTimeout(()=>{
+		entry.classList.toggle("updated")
+	}, 500)
+	window.setTimeout(()=>{
+		entry.classList.toggle("updated")
+	}, 700)
+	window.setTimeout(()=>{
+		entry.classList.toggle("updated")
+	}, 1000)
+}
+
+
 const Events = {
 	saveButtonHandler() {
         event.preventDefault(); // prevents refreshing the page with 'submit'
@@ -39,6 +55,7 @@ const Events = {
 					let updatedEntry = document.getElementById(`entry--${entryId}`)
 					// console.log('updatedEntry', updatedEntry)
 					updatedEntry.scrollIntoView(true)
+					flashJournalEntry(updatedEntry)
                 })
         }
         else {
@@ -48,26 +65,18 @@ const Events = {
 				.then(() => {
 					document.getElementById('journal-form').reset()
 					window.scrollTo(0,document.body.scrollHeight)
-					//TODO: target newest journal entry and apply temporary flash of color
+
+					// target newest journal entry and apply temporary flash of color (advice from Guy C.)
 					let entries = document.getElementsByClassName("description")
+					// loop through all journal entries
 					for (let entry of entries){
+						// is this the newest entry? if so, do fun stuff
 						if (entry.textContent === description) {
-							console.log(entry.parentElement.id);
+							// console.log(entry.parentElement.id);
 							let journalId = entry.parentElement.id
 							let newEntry = document.getElementById(journalId)
-
-							window.setTimeout(()=>{
-								newEntry.classList.toggle("new")
-							}, 300)
-							window.setTimeout(()=>{
-								newEntry.classList.toggle("new")
-							}, 500)
-							window.setTimeout(()=>{
-								newEntry.classList.toggle("new")
-							}, 700)
-							window.setTimeout(()=>{
-								newEntry.classList.toggle("new")
-							}, 900)
+							
+							flashJournalEntry(newEntry)
 						}
 					}
 				})

@@ -34,20 +34,6 @@
       "description": "applying the filter method to the moods",
       "mood": "Caffeinated",
       "id": 6
-    },
-    {
-      "date": "2019-10-31",
-      "concept": "rgse",
-      "description": "sergseg",
-      "mood": "Caffeinated",
-      "id": 7
-    },
-    {
-      "date": "2019-10-31",
-      "concept": "awefawef",
-      "description": "awefawef",
-      "mood": "Caffeinated",
-      "id": 8
     }
   ]
 }

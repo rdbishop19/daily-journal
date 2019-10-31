@@ -57,12 +57,17 @@ button {
     background-image: url("../assets/Looseleaf_Legal_Pad_Background.svg");
     /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/42/Looseleaf_Legal_Pad_Background.svg"); */
 }
-.new {
+.updated {
     background-color: lightgreen;
 }
 
 .entry {
     margin: 50px 10%;
+    padding: 15px;
+    /* https://stackoverflow.com/questions/8289470/creating-a-fuzzy-border-in-css-3 */
+    /* box-shadow: [direction (inset)] [color] [Horizontal Distance] [Vertical Distance] [size];  */
+    box-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;
+    border-radius: 15px;
 }
 
 #today-button {
