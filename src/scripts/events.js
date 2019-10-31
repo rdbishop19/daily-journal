@@ -11,11 +11,11 @@ const Events = {
 		const description = document.querySelector('#journalEntry').value;
 		const mood = document.querySelector('#mood').value;
 
-        const mainRegEx = /[^a-z0-9{}.?!:;\s]/gi
+        const mainRegEx = /[^a-z0-9{}\.\(\)\?\-!:;\s]/gi
         const swearWords = /( (shit|damn|hell|fuck|bitch|) )/gi
 
 		function badChar(element) {
-			// badCharFound = array if anything not in 'mainRegEx' is found in the string
+			// badCharFound (array) --> if anything not in 'mainRegEx' is found in the string
             const badCharFound = element.match(mainRegEx);
             const curseWordFound = element.match(swearWords)
 
@@ -24,7 +24,8 @@ const Events = {
 		if ([ concept, description].some(badChar)) {
             window.alert('Please use only numbers, letters, or { } : ; . ! ? in form fields. \nAlso, no profanity, please. :)');
             return
-        }
+		}
+		
         if (hiddenEntryId !== ""){
             Data.updateJournalEntry(hiddenEntryId, {date, concept, description, mood})
                 .then(Data.getJournalEntries)
@@ -32,7 +33,7 @@ const Events = {
                 .then(() => {
                     document.getElementById('journal-form').reset()
                     document.querySelector('#entryId').value = ""
-                    document.querySelector("#clear-button").disabled = false;
+					document.querySelector("#clear-button").disabled = false;
                 })
         }
         else {
