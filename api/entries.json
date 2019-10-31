@@ -24,7 +24,7 @@
     {
       "date": "2019-10-30",
       "concept": "POST method HTTP requests",
-      "description": "Reviewing the POST method of HTTP requests with Steve Brownlee\nThis is more of a review of concepts that are covered in the daily journal exercises",
+      "description": "Reviewing the POST method of HTTP requests with Steve Brownlee\nThis is more of a review of concepts that are covered in the daily journal exercises blah",
       "mood": "Meh",
       "id": 5
     },
@@ -34,6 +34,20 @@
       "description": "applying the filter method to the moods",
       "mood": "Caffeinated",
       "id": 6
+    },
+    {
+      "date": "2019-10-31",
+      "concept": "rgse",
+      "description": "sergseg",
+      "mood": "Caffeinated",
+      "id": 7
+    },
+    {
+      "date": "2019-10-31",
+      "concept": "awefawef",
+      "description": "awefawef",
+      "mood": "Caffeinated",
+      "id": 8
     }
   ]
 }

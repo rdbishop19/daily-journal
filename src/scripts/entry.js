@@ -6,7 +6,7 @@ const Entry = {
             <section id="entry--${id}" class="entry">
             <h2>${concept}</h2>
                 <h3>${date}</h3>
-                <p>${description}</p>
+                <p class="description">${description}</p>
                 <p><strong>Mood:</strong> ${mood}</p>
                 <button id="edit--${id}" class="btn edit">Edit</button>
                 <button id="delete--${id}" class="btn btn-danger delete">Delete</button>

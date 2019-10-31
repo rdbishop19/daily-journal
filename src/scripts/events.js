@@ -31,10 +31,14 @@ const Events = {
                 .then(Data.getJournalEntries)
                 .then(Dom.renderJournal)
                 .then(() => {
-                    document.getElementById('journal-form').reset()
+					document.getElementById('journal-form').reset()
+					let entryId = document.querySelector('#entryId').value
                     document.querySelector('#entryId').value = ""
 					document.querySelector("#clear-button").disabled = false;
-					// document.querySelector("#journalDate").focus();
+					// console.log('entryId', entryId)
+					let updatedEntry = document.getElementById(`entry--${entryId}`)
+					// console.log('updatedEntry', updatedEntry)
+					updatedEntry.scrollIntoView(true)
                 })
         }
         else {
@@ -43,7 +47,29 @@ const Events = {
 				.then(Dom.renderJournal)
 				.then(() => {
 					document.getElementById('journal-form').reset()
-					// document.querySelector("#journalDate").focus();
+					window.scrollTo(0,document.body.scrollHeight)
+					//TODO: target newest journal entry and apply temporary flash of color
+					let entries = document.getElementsByClassName("description")
+					for (let entry of entries){
+						if (entry.textContent === description) {
+							console.log(entry.parentElement.id);
+							let journalId = entry.parentElement.id
+							let newEntry = document.getElementById(journalId)
+
+							window.setTimeout(()=>{
+								newEntry.classList.toggle("new")
+							}, 300)
+							window.setTimeout(()=>{
+								newEntry.classList.toggle("new")
+							}, 500)
+							window.setTimeout(()=>{
+								newEntry.classList.toggle("new")
+							}, 700)
+							window.setTimeout(()=>{
+								newEntry.classList.toggle("new")
+							}, 900)
+						}
+					}
 				})
         }
 	},
@@ -61,7 +87,10 @@ const Events = {
 		let entryId = event.target.id.split('--')[1];
 		console.log('edit entry', entryId);
         // TODO: figure out modal for edit window on clicked entry
-        Entry.editEntryObject(entryId);
+		Entry.editEntryObject(entryId);
+		document.getElementById('journalDate').focus();
+		window.scrollTo(0,0)
+
 	},
 	clearButtonHandler() {
 		if (window.confirm('Click OK to clear the form and start over.')) {
