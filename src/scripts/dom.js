@@ -1,14 +1,18 @@
 import Entry from './entry.js'
-import Form from './entryForm.js'
+import Form from './formManager.js'
 import Events from './events.js'
 
 const Dom = {
 	renderPage() {
 		let formContainer = document.querySelector('#formContainer');
         let entryForm = Form.createEntryForm()
-		formContainer.innerHTML = entryForm;
-        let filterForm = Form.createMoodFilter()
-        formContainer.innerHTML += filterForm
+        formContainer.innerHTML = entryForm;
+        
+        let filterContainer = document.querySelector("#filterContainer")
+        let filterMood = Form.createMoodFilterForm()
+        filterContainer.innerHTML += filterMood
+        let searchForm = Form.createSearchFilterForm()
+        filterContainer.innerHTML += searchForm
 	},
 	renderJournal(entries) {
         let entryLog = document.querySelector('.entryLog');
