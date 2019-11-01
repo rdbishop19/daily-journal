@@ -10,8 +10,8 @@
     {
       "date": "2019-10-28",
       "concept": "JavaScript array methods",
-      "description": ".forEach(), .filter(), .map(), .find(), .reduce(), .sort()",
-      "mood": "",
+      "description": ".forEach() .filter() .map() .find() .reduce() .sort()",
+      "mood": "Meh",
       "id": 3
     },
     {
@@ -24,7 +24,7 @@
     {
       "date": "2019-10-30",
       "concept": "POST method HTTP requests",
-      "description": "Reviewing the POST method of HTTP requests with Steve Brownlee\nThis is more of a review of concepts that are covered in the daily journal exercises blah",
+      "description": "Reviewing the POST method of HTTP requests with Steve.\nThis is more of a review of concepts that are covered in the daily journal exercises",
       "mood": "Meh",
       "id": 5
     },

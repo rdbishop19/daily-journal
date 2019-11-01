@@ -159,12 +159,37 @@ const Events = {
             // console.log(filteredEntries)            
             Dom.renderJournal(filteredEntries)
         })
-    },
+	},
+	searchEventHandler(){
+		/* filter entries by search term */
+		// console.log(event.keyCode)
+		if ( event.keyCode === 13 ) {
+			// console.log(event.target.value);
+			const searchTerm = event.target.value;
+			Data.getJournalEntries().then( entries => {
+				const matchingEntries = entries.filter( entry => {
+					for ( let value of Object.values( entry )){
+						// note: .includes() only works with strings
+						if ( typeof value === "string" && 
+								value.toLowerCase().includes( searchTerm.toLowerCase() )){
+							return true
+						}
+					}
+					return false
+				})
+				Dom.renderJournal(matchingEntries)
+			})
+		}
+	},
     attachFormEvents() {
         // 'filter by mood' radio buttons
         document.getElementsByName("mood--filter").forEach(button => {
             button.addEventListener("click", this.radioButtonHandler)
-        })
+		})
+		// 'search filter'
+		document.getElementById("search-filter")
+			.addEventListener("keypress", this.searchEventHandler)
+
         // 'save' button
         document.querySelector('form')
             .addEventListener('submit', this.saveButtonHandler);

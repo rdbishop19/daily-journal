@@ -35,20 +35,28 @@ const Form = {
     // construct a set of radio buttons for selecting one of the moods. 
     // It's important that each of the radio buttons has the same value for the name attribute, 
     // but each should a different value for the value attribute.
-    createMoodFilter(){
+    createMoodFilterForm(){
         return `
             <fieldset id="mood-filter">
                 <legend>Filter Journal Entries by Mood</legend>
-                <input id="mood-1" type="radio" name="mood--filter" value="Caffeinated">
-                <label for="mood-1">Caffeinated</label>
-                <input id="mood-2" type="radio" name="mood--filter" value="Hacker">
-                <label for="mood-2">Hacker</label>
-                <input id="mood-3" type="radio" name="mood--filter" value="Meh">
-                <label for="mood-3">Meh</label>
-                <input id="mood-4" type="radio" name="mood--filter" value="Motivated">
-                <label for="mood-4">Motivated</label>
-                <input id="mood-5" type="radio" name="mood--filter" value="Zombie">
-                <label for="mood-5">Zombie</label>
+                <label for="mood-1"><input id="mood-1" type="radio" name="mood--filter" value="Caffeinated">
+                Caffeinated</label>
+                <label for="mood-2"><input id="mood-2" type="radio" name="mood--filter" value="Hacker">
+                Hacker</label>
+                <label for="mood-3"><input id="mood-3" type="radio" name="mood--filter" value="Meh">
+                Meh</label>
+                <label for="mood-4"><input id="mood-4" type="radio" name="mood--filter" value="Motivated">
+                Motivated</label>
+                <label for="mood-5"><input id="mood-5" type="radio" name="mood--filter" value="Zombie">
+                Zombie</label>
+            </fieldset>
+        `
+    },
+    createSearchFilterForm(){
+        return `
+            <fieldset id="search-filter">
+                <legend>Search Journal Entries</legend>
+                <input id="search-text">
             </fieldset>
         `
     }
