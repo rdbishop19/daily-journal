@@ -16,8 +16,8 @@
     },
     {
       "date": "2019-10-29",
-      "concept": "Bootstrap",
-      "description": "Added bootstrap styling to Daily Journal. Looks clean with little work to integrate. BANGARANG",
+      "concept": "Bootstrap (CSS)",
+      "description": "Added Bootstrap styling to Daily Journal. Looks clean with little work to integrate. BANGARANG",
       "mood": "Motivated",
       "id": 4
     },
@@ -34,6 +34,20 @@
       "description": "applying the filter method to the moods",
       "mood": "Caffeinated",
       "id": 6
+    },
+    {
+      "date": "2019-11-04",
+      "concept": "Local storage",
+      "description": "Practiced refactoring in localStorage with .getItem() and .setItem()",
+      "mood": "Zombie",
+      "id": 7
+    },
+    {
+      "date": "2019-11-04",
+      "concept": "this",
+      "description": "Not sure I understand this but I think I understand this a bit better",
+      "mood": "Hacker",
+      "id": 8
     }
   ]
 }
