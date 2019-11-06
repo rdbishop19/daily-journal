@@ -29,6 +29,5 @@ export default {
 			const newEntry = Entry.createHtml(entry);
             entryLog.innerHTML += newEntry;
         }
-        Events.attachJournalEvents()
     }
 };

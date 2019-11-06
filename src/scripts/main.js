@@ -9,4 +9,4 @@ import Events from "./events.js"
 Dom.renderPage();
 Events.attachFormEvents()
 
-Data.getJournalEntries().then(Dom.renderJournal)
+Data.getJournalEntries().then(Dom.renderJournal).then(Events.attachJournalEvents)
