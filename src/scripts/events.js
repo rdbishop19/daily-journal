@@ -1,19 +1,19 @@
-import Dom from './dom.js';
-import Data from './data.js';
-import Entry from './entry.js';
+import Dom from "./dom.js";
+import Data from "./data.js";
+import Entry from "./entry.js";
 
 const flashJournalEntry = (entry) => {
 	window.setTimeout(() => {
-		entry.classList.toggle('updated');
+		entry.classList.toggle("updated");
 	}, 200);
 	window.setTimeout(() => {
-		entry.classList.toggle('updated');
+		entry.classList.toggle("updated");
 	}, 500);
 	window.setTimeout(() => {
-		entry.classList.toggle('updated');
+		entry.classList.toggle("updated");
 	}, 700);
 	window.setTimeout(() => {
-		entry.classList.toggle('updated');
+		entry.classList.toggle("updated");
 	}, 1000);
 };
 
@@ -21,7 +21,7 @@ const filterSearchTerm = (searchTerm, entries) => {
 	const matchingEntries = entries.filter((entry) => {
 		for (let value of Object.values(entry)) {
 			// note: .includes() only works with strings
-			if (typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())) {
+			if (typeof value === "string" && value.toLowerCase().includes(searchTerm.toLowerCase())) {
 				return true;
 			}
 		}
@@ -34,11 +34,11 @@ const filterSearchTerm = (searchTerm, entries) => {
 const Events = {
 	saveButtonHandler() {
 		event.preventDefault(); // prevents refreshing the page with 'submit'
-		const hiddenEntryId = document.querySelector('#entryId').value;
-		const date = document.querySelector('#journalDate').value;
-		const concept = document.querySelector('#conceptsCovered').value;
-		const description = document.querySelector('#journalEntry').value;
-		const mood = document.querySelector('#mood').value;
+		const hiddenEntryId = document.querySelector("#entryId").value;
+		const date = document.querySelector("#journalDate").value;
+		const concept = document.querySelector("#conceptsCovered").value;
+		const description = document.querySelector("#journalEntry").value;
+		const mood = document.querySelector("#mood").value;
 
 		const mainRegEx = /[^a-z0-9{}\.\(\)\?\-!:;\s]/gi;
 		const swearWords = /( (shit|damn|hell|fuck|bitch|) )/gi;
@@ -52,20 +52,20 @@ const Events = {
 		}
 		if ([ concept, description ].some(badChar)) {
 			window.alert(
-				'Please use only numbers, letters, or { } : ; . ! ? in form fields. \nAlso, no profanity, please. :)'
+				"Please use only numbers, letters, or { } : ; . ! ? in form fields. \nAlso, no profanity, please. :)"
 			);
 			return;
 		}
 
-		if (hiddenEntryId !== '') {
+		if (hiddenEntryId !== "") {
 			Data.updateJournalEntry(hiddenEntryId, { date, concept, description, mood })
 				.then(Data.getJournalEntries)
 				.then(Dom.renderJournal)
 				.then(() => {
-					document.getElementById('journal-form').reset();
-					let entryId = document.querySelector('#entryId').value;
-					document.querySelector('#entryId').value = '';
-					document.querySelector('#clear-button').disabled = false;
+					document.getElementById("journal-form").reset();
+					let entryId = document.querySelector("#entryId").value;
+					document.querySelector("#entryId").value = "";
+					document.querySelector("#clear-button").disabled = false;
 					// console.log('entryId', entryId)
 					let updatedEntry = document.getElementById(`entry--${entryId}`);
 					// console.log('updatedEntry', updatedEntry)
@@ -77,11 +77,11 @@ const Events = {
 				.then(Data.getJournalEntries)
 				.then(Dom.renderJournal)
 				.then(() => {
-					document.getElementById('journal-form').reset();
+					document.getElementById("journal-form").reset();
 					window.scrollTo(0, document.body.scrollHeight);
 
 					// target newest journal entry and apply temporary flash of color (advice from Guy C.)
-					let entries = document.getElementsByClassName('description');
+					let entries = document.getElementsByClassName("description");
 					// loop through all journal entries
 					for (let entry of entries) {
 						// is this the newest entry? if so, do fun stuff
@@ -98,80 +98,80 @@ const Events = {
 	},
 	deleteButtonHandler() {
 		// console.log("Delete button clicked", event.target.id);
-		let entryId = event.target.id.split('--')[1];
-		if (window.confirm('Delete this entry?')) {
-			console.log('deleted entry', entryId);
+		let entryId = event.target.id.split("--")[1];
+		if (window.confirm("Delete this entry?")) {
+			console.log("deleted entry", entryId);
 			Data.deleteJournalEntry(entryId).then(Data.getJournalEntries).then(Dom.renderJournal);
 		}
 	},
 	editButtonHandler() {
-		let entryId = event.target.id.split('--')[1];
+		let entryId = event.target.id.split("--")[1];
 		// console.log('edit entry', entryId);
 		// TODO: figure out modal for edit window on clicked entry
 		Entry.editEntryObject(entryId);
-		document.getElementById('journalDate').focus();
+		document.getElementById("journalDate").focus();
 		window.scrollTo(0, 0);
 	},
 	clearButtonHandler() {
-		if (window.confirm('Click OK to clear the form and start over.')) {
-			document.getElementById('journal-form').reset();
-			document.getElementById('journalDate').focus();
+		if (window.confirm("Click OK to clear the form and start over.")) {
+			document.getElementById("journal-form").reset();
+			document.getElementById("journalDate").focus();
 			window.scrollTo(0, 0);
 		}
 	},
 	todayButtonHandler() {
 		event.preventDefault();
-		let dateField = document.querySelector('#journalDate');
+		let dateField = document.querySelector("#journalDate");
 		let date = new Date();
 
 		// https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
 		function formatDate(today) {
 			var d = new Date(today),
-				month = '' + (d.getMonth() + 1),
-				day = '' + d.getDate(),
+				month = "" + (d.getMonth() + 1),
+				day = "" + d.getDate(),
 				year = d.getFullYear();
 
-			if (month.length < 2) month = '0' + month;
-			if (day.length < 2) day = '0' + day;
+			if (month.length < 2) month = "0" + month;
+			if (day.length < 2) day = "0" + day;
 
-			return [ year, month, day ].join('-');
+			return [ year, month, day ].join("-");
 		}
 		let today = formatDate(date);
 		dateField.value = today;
 	},
 	characterCountHandler() {
-		let characterCount = document.querySelector('#conceptsCovered').value.length;
-		let maxCharNotice = document.querySelector('#characters-remaining');
-		let conceptsCovered = document.getElementById('conceptsCovered').value;
+		let characterCount = document.querySelector("#conceptsCovered").value.length;
+		let maxCharNotice = document.querySelector("#characters-remaining");
+		let conceptsCovered = document.getElementById("conceptsCovered").value;
 		let maxCharLength = 80;
 		let displayAtNumber = maxCharLength - 15;
 
 		if (characterCount <= displayAtNumber) {
-			maxCharNotice.textContent = '';
-			maxCharNotice.style.color = 'black';
+			maxCharNotice.textContent = "";
+			maxCharNotice.style.color = "black";
 		} else if (characterCount < maxCharLength) {
-			maxCharNotice.classList.remove('warning');
+			maxCharNotice.classList.remove("warning");
 			maxCharNotice.textContent = `${maxCharLength - characterCount} remaining`;
 		} else if ((characterCount = maxCharLength)) {
 			setTimeout(() => {
-				maxCharNotice.textContent = '0 remaining';
+				maxCharNotice.textContent = "0 remaining";
 			}, 2000);
-			maxCharNotice.textContent = 'Too many characters';
-			maxCharNotice.classList.add('warning');
-			document.querySelector('#conceptsCovered').value = conceptsCovered.slice(0, maxCharLength);
+			maxCharNotice.textContent = "Too many characters";
+			maxCharNotice.classList.add("warning");
+			document.querySelector("#conceptsCovered").value = conceptsCovered.slice(0, maxCharLength);
 		}
 	},
 	radioButtonHandler() {
 		const mood = event.target.value;
-		const cachedEntries = JSON.parse(localStorage.getItem('entries'));
+		const cachedEntries = JSON.parse(localStorage.getItem("entries"));
 		if (!cachedEntries.length) {
-			console.log('used api');
+			console.log("used api");
 			Data.getJournalEntries().then((entries) => {
 				const filteredEntries = entries.filter((entry) => entry.mood === mood);
 				Dom.renderJournal(filteredEntries);
 			});
 		} else {
-			console.log('used cache');
+			console.log("used cache");
 			const filteredEntries = cachedEntries.filter((entry) => entry.mood === mood);
 			Dom.renderJournal(filteredEntries);
 		}
@@ -180,7 +180,7 @@ const Events = {
 		/* filter entries by search term */
 		if (event.keyCode === 13) {
 			const searchTerm = event.target.value;
-			const cachedEntries = JSON.parse(localStorage.getItem('entries'));
+			const cachedEntries = JSON.parse(localStorage.getItem("entries"));
 			if (!cachedEntries.length) {
 				// console.log('used api');
 				Data.getJournalEntries().then((entries) => {
@@ -196,34 +196,34 @@ const Events = {
 	},
 	attachFormEvents() {
 		// 'filter by mood' radio buttons
-		document.getElementsByName('mood--filter').forEach((button) => {
-			button.addEventListener('click', this.radioButtonHandler);
+		document.getElementsByName("mood--filter").forEach((button) => {
+			button.addEventListener("click", this.radioButtonHandler);
 		});
 		// 'search filter'
-		document.getElementById('search-filter').addEventListener('keypress', this.searchEventHandler);
+		document.getElementById("search-filter").addEventListener("keypress", this.searchEventHandler);
 
 		// 'save' button
-		document.querySelector('form').addEventListener('submit', this.saveButtonHandler);
+		document.querySelector("form").addEventListener("submit", this.saveButtonHandler);
 		// 'clear' form button
-		document.querySelector('#clear-button').addEventListener('click', this.clearButtonHandler);
+		document.querySelector("#clear-button").addEventListener("click", this.clearButtonHandler);
 
 		// character count event
-		document.querySelector('#conceptsCovered').addEventListener('keyup', this.characterCountHandler);
+		document.querySelector("#conceptsCovered").addEventListener("keyup", this.characterCountHandler);
 
 		// 'today' form button
-		document.querySelector('#today-button').addEventListener('click', this.todayButtonHandler);
+		document.querySelector("#today-button").addEventListener("click", this.todayButtonHandler);
 	},
 	attachJournalEvents() {
 		// 'delete' buttons
-		let deleteButtons = document.querySelectorAll('.delete');
+		let deleteButtons = document.querySelectorAll(".delete");
 		deleteButtons.forEach((button) => {
-			button.addEventListener('click', this.deleteButtonHandler);
+			button.addEventListener("click", this.deleteButtonHandler);
 		});
 
 		// 'edit' buttons
-		let editButtons = document.querySelectorAll('.edit');
+		let editButtons = document.querySelectorAll(".edit");
 		editButtons.forEach((button) => {
-			button.addEventListener('click', this.editButtonHandler);
+			button.addEventListener("click", this.editButtonHandler);
 		});
 	}
 };

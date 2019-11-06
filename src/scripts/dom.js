@@ -1,13 +1,13 @@
-import Entry from './entry.js'
-import Form from './formManager.js'
-import Events from './events.js'
+import Entry from "./entry.js"
+import Form from "./formManager.js"
+import Events from "./events.js"
 
 const Dom = {
 	renderPage() {
-		let formContainer = document.querySelector('#formContainer');
+		let formContainer = document.querySelector("#formContainer");
         let entryForm = Form.createEntryForm()
         formContainer.innerHTML = entryForm;
-        
+
         let filterContainer = document.querySelector("#filterContainer")
         let filterMood = Form.createMoodFilterForm()
         filterContainer.innerHTML += filterMood
@@ -15,8 +15,8 @@ const Dom = {
         filterContainer.innerHTML += searchForm
 	},
 	renderJournal(entries) {
-        let entryLog = document.querySelector('.entryLog');
-        entryLog.innerHTML = ''
+        let entryLog = document.querySelector(".entryLog");
+        entryLog.innerHTML = ""
 
         // checks for empty array of entries before proceeding
         if (!entries.length){

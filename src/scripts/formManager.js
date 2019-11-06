@@ -31,9 +31,9 @@ const Form = {
             <input type="reset" id="clear-button" class="btn btn-default" value="Start Over">
         </form>`;
     },
-    // Using <fieldset>, <legend>, <input type="radio">, and <label> HTML components, 
-    // construct a set of radio buttons for selecting one of the moods. 
-    // It's important that each of the radio buttons has the same value for the name attribute, 
+    // Using <fieldset>, <legend>, <input type="radio">, and <label> HTML components,
+    // construct a set of radio buttons for selecting one of the moods.
+    // It's important that each of the radio buttons has the same value for the name attribute,
     // but each should a different value for the value attribute.
     createMoodFilterForm(){
         return `

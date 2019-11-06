@@ -1,9 +1,9 @@
-import Data from './data.js';
+import Data from "./data.js";
 
 const formatDate = date => {
 	//format date to be 'September 11, 1987' style
-	const months = ["January", "February", "March", 
-					"April", "May", "June", 
+	const months = ["January", "February", "March",
+					"April", "May", "June",
 					"July", "August", "September",
 					"October", "November", "December"]
 
@@ -30,15 +30,15 @@ const Entry = {
             `;
 	},
 	updateFormFields(entry) {
-		document.querySelector('#entryId').value = entry.id;
-		document.querySelector('#journalDate').value = entry.date;
-		document.querySelector('#conceptsCovered').value = entry.concept;
-		document.querySelector('#journalEntry').value = entry.description;
-		document.querySelector('#mood').value = entry.mood;
-		document.querySelector('#clear-button').disabled = true;
+		document.querySelector("#entryId").value = entry.id;
+		document.querySelector("#journalDate").value = entry.date;
+		document.querySelector("#conceptsCovered").value = entry.concept;
+		document.querySelector("#journalEntry").value = entry.description;
+		document.querySelector("#mood").value = entry.mood;
+		document.querySelector("#clear-button").disabled = true;
 	},
 	editEntryObject(entryId) {
-		const cachedEntries = JSON.parse(localStorage.getItem('entries'));
+		const cachedEntries = JSON.parse(localStorage.getItem("entries"));
 		if (cachedEntries.length) {
 			for (const entry of cachedEntries) {
 				if (entry.id === parseInt(entryId)) {
