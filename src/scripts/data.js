@@ -9,7 +9,7 @@ const entriesUrl = "http://localhost:8088/entries"
 
 const Data = {
 	getJournalEntries() {
-		return fetch(entriesUrl)
+		return fetch(`${entriesUrl}?_expand=mood`)
 			.then(r => r.json())
 			.then(cacheJournalEntries)
 	},
@@ -40,6 +40,10 @@ const Data = {
 			},
 			body: JSON.stringify(entry)
 		})
+	},
+	getMoodList(){
+		return fetch("http://localhost:8088/moods")
+			.then(r => r.json())
 	}
 };
 

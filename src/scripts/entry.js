@@ -21,7 +21,7 @@ const updateFormFields = (entry) => {
 	document.querySelector("#journalDate").value = entry.date;
 	document.querySelector("#conceptsCovered").value = entry.concept;
 	document.querySelector("#journalEntry").value = entry.description;
-	document.querySelector("#mood").value = entry.mood;
+	document.querySelector("#mood").value = entry.moodId;
 	document.querySelector("#clear-button").disabled = true;
 }
 
@@ -32,7 +32,7 @@ export default {
             <h2>${concept}</h2>
                 <h3>${formatDate(date)}</h3>
                 <p class="description">${description}</p>
-                <p><strong>Mood:</strong> ${mood}</p>
+                <p><strong>Mood:</strong> ${mood.label}</p>
                 <button id="edit--${id}" class="btn edit">Edit</button>
                 <button id="delete--${id}" class="btn btn-danger delete">Delete</button>
             </section>

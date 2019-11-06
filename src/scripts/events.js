@@ -40,7 +40,7 @@ const saveButtonHandler = () => {
 	const date = document.querySelector("#journalDate").value;
 	const concept = document.querySelector("#conceptsCovered").value;
 	const description = document.querySelector("#journalEntry").value;
-	const mood = document.querySelector("#mood").value;
+	const moodId = parseInt(document.querySelector("#mood").value);
 
 	if ([ concept, description ].some(Validation.badChar)) {
 		window.alert(
@@ -49,7 +49,7 @@ const saveButtonHandler = () => {
 		return;
 	}
 	if (hiddenEntryId !== "") {
-		Data.updateJournalEntry(hiddenEntryId, { date, concept, description, mood })
+		Data.updateJournalEntry(hiddenEntryId, { date, concept, description, moodId })
 			.then(Data.getJournalEntries)
 			.then(Dom.renderJournal)
 			.then(() => {
@@ -64,7 +64,7 @@ const saveButtonHandler = () => {
 				flashJournalEntry(updatedEntry);
 			});
 	} else {
-		Data.saveJournalEntry({ date, concept, description, mood })
+		Data.saveJournalEntry({ date, concept, description, moodId })
 			.then(Data.getJournalEntries)
 			.then(Dom.renderJournal)
 			.then(() => {
@@ -149,12 +149,12 @@ const radioButtonHandler = () => {
 	if (!cachedEntries.length) {
 		// console.log("used api");
 		Data.getJournalEntries().then((entries) => {
-			const filteredEntries = entries.filter((entry) => entry.mood === mood);
+			const filteredEntries = entries.filter((entry) => parseInt(entry.moodId) === parseInt(mood));
 			Dom.renderJournal(filteredEntries);
 		});
 	} else {
 		// console.log("used cache");
-		const filteredEntries = cachedEntries.filter((entry) => entry.mood === mood);
+		const filteredEntries = cachedEntries.filter((entry) => parseInt(entry.moodId) === parseInt(mood));
 		Dom.renderJournal(filteredEntries);
 	}
 };
