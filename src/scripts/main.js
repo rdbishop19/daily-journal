@@ -7,5 +7,6 @@ import Data from "./data.js"
 import Events from "./events.js"
 
 Dom.renderPage();
-Data.getJournalEntries().then(Dom.renderJournal)
 Events.attachFormEvents()
+
+Data.getJournalEntries().then(Dom.renderJournal).then(Events.attachJournalEvents)

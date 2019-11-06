@@ -16,7 +16,16 @@ const formatDate = date => {
 	return formattedDate
 }
 
-const Entry = {
+const updateFormFields = (entry) => {
+	document.querySelector("#entryId").value = entry.id;
+	document.querySelector("#journalDate").value = entry.date;
+	document.querySelector("#conceptsCovered").value = entry.concept;
+	document.querySelector("#journalEntry").value = entry.description;
+	document.querySelector("#mood").value = entry.mood;
+	document.querySelector("#clear-button").disabled = true;
+}
+
+export default {
 	createHtml({ id, concept, date, description, mood }) {
 		return `
             <section id="entry--${id}" class="entry">
@@ -29,27 +38,18 @@ const Entry = {
             </section>
             `;
 	},
-	updateFormFields(entry) {
-		document.querySelector("#entryId").value = entry.id;
-		document.querySelector("#journalDate").value = entry.date;
-		document.querySelector("#conceptsCovered").value = entry.concept;
-		document.querySelector("#journalEntry").value = entry.description;
-		document.querySelector("#mood").value = entry.mood;
-		document.querySelector("#clear-button").disabled = true;
-	},
+
 	editEntryObject(entryId) {
 		const cachedEntries = JSON.parse(localStorage.getItem("entries"));
 		if (cachedEntries.length) {
 			for (const entry of cachedEntries) {
 				if (entry.id === parseInt(entryId)) {
-                    this.updateFormFields(entry);
+                    updateFormFields(entry);
                     break
 				}
 			}
 		} else {
-			Data.getJournalEntry(entryId).then(this.updateFormFields);
+			Data.getJournalEntry(entryId).then(updateFormFields);
 		}
 	}
 };
-
-export default Entry;
