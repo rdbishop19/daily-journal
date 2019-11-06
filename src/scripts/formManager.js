@@ -1,3 +1,5 @@
+import Data from "./data";
+
 export default {
 	createEntryForm() {
 		return `
@@ -19,41 +21,30 @@ export default {
             <fieldset class="form-group">
                 <label for="mood">Mood for the Day</label>
                 <select name="mood" id="mood" class="form-field" required>
-                    <option value=""></option>
-                    <option value="Caffeinated">Caffeinated</option>
-                    <option value="Hacker">Hacker</option>
-                    <option value="Meh">Meh</option>
-                    <option value="Motivated">Motivated</option>
-                    <option value="Zombie">Zombie</option>
+                    
                 </select>        
             </fieldset>
             <input type="submit" id="save-entry" class="save btn btn-primary" value="Save Journal Entry">
             <input type="reset" id="clear-button" class="btn btn-default" value="Start Over">
         </form>`;
-    },
-    createMoodFilterForm(){
-        return `
-            <fieldset id="mood-filter">
-                <legend>Filter Journal Entries by Mood</legend>
-                <label for="mood-1"><input id="mood-1" type="radio" name="mood--filter" value="Caffeinated">
-                Caffeinated</label>
-                <label for="mood-2"><input id="mood-2" type="radio" name="mood--filter" value="Hacker">
-                Hacker</label>
-                <label for="mood-3"><input id="mood-3" type="radio" name="mood--filter" value="Meh">
-                Meh</label>
-                <label for="mood-4"><input id="mood-4" type="radio" name="mood--filter" value="Motivated">
-                Motivated</label>
-                <label for="mood-5"><input id="mood-5" type="radio" name="mood--filter" value="Zombie">
-                Zombie</label>
-            </fieldset>
-        `
-    },
-    createSearchFilterForm(){
-        return `
+	},
+	createMoodFilterForm(moods) {
+		let moodForm = `<fieldset id="mood-filter">
+                <legend>Filter Journal Entries by Mood</legend>`;
+		moods.forEach((mood) => {
+			// console.log(mood.id, mood.label)
+			moodForm += `<label for="mood-${mood.id}"><input id="mood-${mood.id}" type="radio" name="mood--filter" value=${mood.id}>
+                    ${mood.label}</label>`;
+		});
+		moodForm += "</fieldset>";
+		return moodForm;
+	},
+	createSearchFilterForm() {
+		return `
             <fieldset id="search-filter">
                 <legend>Search Journal Entries</legend>
                 <input id="search-text">
             </fieldset>
-        `
-    }
+        `;
+	}
 };

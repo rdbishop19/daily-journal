@@ -1,18 +1,28 @@
 import Entry from "./entry.js"
 import Form from "./formManager.js"
-import Events from "./events.js"
+import Data from "./data.js";
+import Events from "./events.js";
 
 const formContainer = document.querySelector("#formContainer");
 const filterContainer = document.querySelector("#filterContainer")
 const entryLog = document.querySelector(".entryLog");
 
 export default {
-	renderPage() {
+    renderPage() {
         let entryForm = Form.createEntryForm()
         formContainer.innerHTML = entryForm;
+        let moodFilter = document.getElementById("mood")
 
-        let filterMood = Form.createMoodFilterForm()
-        filterContainer.innerHTML += filterMood
+        Data.getMoodList().then((moods) => {
+            let moodForm = Form.createMoodFilterForm(moods)
+            filterContainer.innerHTML += moodForm
+
+            moodFilter.innerHTML += "<option value=\"\"></option>"
+            moods.forEach(mood => {
+                moodFilter.innerHTML += `<option value=${mood.id}>${mood.label}</option>`
+            })
+            Events.attachFormEvents()
+        })
         let searchForm = Form.createSearchFilterForm()
         filterContainer.innerHTML += searchForm
 	},
