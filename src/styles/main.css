@@ -62,7 +62,7 @@ button {
 }
 
 .jumbotron {
-    background-image: url("../assets/Looseleaf_Legal_Pad_Background.svg");
+    background-image: url("../src/assets/Looseleaf_Legal_Pad_Background.svg");
     /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/42/Looseleaf_Legal_Pad_Background.svg"); */
 }
 .updated {

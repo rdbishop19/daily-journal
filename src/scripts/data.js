@@ -5,7 +5,7 @@ const cacheJournalEntries = entries => {
 	return entries
 }
 
-const entriesUrl = "http://localhost:3000/entries"
+const entriesUrl = "http://localhost:8088/entries"
 
 const Data = {
 	getJournalEntries() {
